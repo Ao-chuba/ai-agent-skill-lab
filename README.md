@@ -7,10 +7,10 @@ Detailed GenAI, Single-Agent and Multi-Agent Case Study
 
 
 Team member - USN 26 27 28 29 30 
-1DS24CS026 - Anusha 
+1DS24CS026 - Anvesha
 1DS24CS027 - Aochuba 
-1DS24CS028 - Arahan
-1DS24CS029 - Anvesha
+1DS24CS028 - Aparna
+1DS24CS029 - Arahan
 1DS24CS030 - Arfa
 ---
 
