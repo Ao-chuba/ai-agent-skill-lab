@@ -5,6 +5,13 @@ Detailed GenAI, Single-Agent and Multi-Agent Case Study
 
 > **Instructions for the AI code editor:** Read this entire file, then build the project exactly as described. Build in the phases listed under "Build Order". Finish and test each phase before starting the next. Ask me before making any decision not covered here.
 
+
+Team member - USN 26 27 28 29 30 
+1DS24CS026 - Anusha 
+1DS24CS027 - Aochuba 
+1DS24CS028 - Arahan
+1DS24CS029 - Anvesha
+1DS24CS030 - Arfa
 ---
 
 ## 1. Purpose
