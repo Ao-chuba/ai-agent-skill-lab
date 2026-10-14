@@ -233,18 +233,26 @@ DB_NAME=payroll_db
 LLM_API_KEY=your_key_here
 ```
 
-## 12. Acceptance Checklist
+## 12. Team Members
 
-- [ ] Can add, list, search, update salary, calculate net, delete one, delete all
-- [ ] Net salary = basic + bonus - deduction, calculated in backend only
-- [ ] Client-side and server-side validation both work
-- [ ] All SQL is parameterized; data persists in MySQL
-- [ ] Responsive UI on mobile and desktop
-- [ ] (Phase 2) AI explains but never calculates or changes data
-- [ ] (Phase 3) Single agent uses validated tools; destructive actions need confirmation
+| USN / Roll No | Name |
+|---|---|
+| 26 | Anvesha |
+| 27 | Aochuba |
+| 28 | Aparna |
+| 29 | Arahan |
+| 30 | Arfa |
+
+---
+
+## 13. Acceptance Checklist
+
+- [x] Can add, list, search, update salary, calculate net, delete one, delete all
+- [x] Net salary = basic + bonus - deduction, calculated in backend only
+- [x] Client-side and server-side validation both work
+- [x] All SQL is parameterized; data persists in MySQL
+- [x] Responsive UI on mobile and desktop
+- [x] (Phase 2) AI explains but never calculates or changes data
+- [x] (Phase 3) Single agent uses validated tools; destructive actions need confirmation
 - [ ] (Phase 4) Multi-agent flow works with a visible trace
 
-> Note: this README was written from the first page of the case-study PDF (purpose, scope, key rule, learning outcomes). Phases 2-4 are filled in from the title and outcomes. If later pages of the PDF give specific requirements, add them below and have the agent follow them.
-
-## 13. Additional requirements from the case-study PDF
-_(Paste anything from the remaining pages here.)_

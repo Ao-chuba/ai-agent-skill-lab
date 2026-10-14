@@ -181,6 +181,83 @@
     </section>
   </main>
 
+  <!-- ── AI TOOLS SECTION ── -->
+  <section class="ai-section" aria-label="AI Tools">
+    <div class="ai-section-inner">
+
+      <!-- Boundary Info Card -->
+      <div class="boundary-card">
+        <span class="boundary-title">🧠 GenAI vs Agentic AI — Boundaries</span>
+        <div class="boundary-table-wrap">
+          <table class="boundary-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>💬 GenAI — Phase 2</th>
+                <th>🤖 Agentic AI — Phase 3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Role</td><td>Explains, answers questions</td><td>Takes actions via tools</td></tr>
+              <tr><td>Can change data?</td><td class="cell-no">❌ No</td><td class="cell-yes">✅ Yes — via validated tools only</td></tr>
+              <tr><td>Does arithmetic?</td><td class="cell-no">❌ Never</td><td class="cell-no">❌ Never (backend does)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Chat Tabs -->
+      <div class="chat-tabs">
+        <button id="tab-explain" class="chat-tab active" data-tab="explain">
+          💬 AI Explain <span class="tab-badge">Phase 2</span>
+        </button>
+        <button id="tab-agent" class="chat-tab" data-tab="agent">
+          🤖 Agent Chat <span class="tab-badge">Phase 3</span>
+        </button>
+      </div>
+
+      <!-- ── TAB: AI Explain ── -->
+      <div id="panel-explain" class="chat-panel active">
+        <div class="chat-desc">
+          Ask questions like <em>"Why is Ravi's net salary ₹48,000?"</em> or <em>"Explain how net salary is calculated."</em>
+          The AI explains using real data — it never computes or changes anything.
+        </div>
+        <div class="chat-employee-hint">
+          <label for="explain-emp-id">Employee ID (optional — for context):</label>
+          <input id="explain-emp-id" type="text" placeholder="e.g. EMP001" />
+        </div>
+        <div id="explain-messages" class="chat-messages" aria-live="polite"></div>
+        <div class="chat-input-row">
+          <input id="explain-input" type="text" placeholder="Ask a payroll question…" />
+          <button id="explain-send" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+
+      <!-- ── TAB: Agent Chat ── -->
+      <div id="panel-agent" class="chat-panel hidden">
+        <div class="chat-desc">
+          Give the agent natural language commands like <em>"Add employee EMP005 Priya with salary 60000 bonus 5000 deduction 3000"</em>
+          or <em>"Show all employees"</em> or <em>"Delete EMP003"</em>.
+        </div>
+        <div id="agent-messages" class="chat-messages" aria-live="polite"></div>
+        <!-- Agent Confirm Banner -->
+        <div id="agent-confirm-banner" class="agent-confirm-banner hidden">
+          <span class="agent-confirm-icon">⚠️</span>
+          <span id="agent-confirm-text"></span>
+          <div class="agent-confirm-btns">
+            <button id="agent-confirm-yes" class="btn btn-danger">Yes, Delete</button>
+            <button id="agent-confirm-no" class="btn btn-outline">Cancel</button>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input id="agent-input" type="text" placeholder="e.g. List all employees…" />
+          <button id="agent-send" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── CONFIRM DIALOG ── -->
   <div id="confirm-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
     <div class="confirm-box">
