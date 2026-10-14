@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Payroll System</title>
+  <meta name="description" content="A modern employee payroll management system — add, update, search, and manage employee salary records." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">💼</span>
+        <div>
+          <span class="logo-title">PayrollPro</span>
+          <span class="logo-sub">Employee Management System</span>
+        </div>
+      </div>
+      <div class="header-meta">
+        <span id="employee-count-badge" class="badge">0 employees</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── TOAST CONTAINER ── -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <main class="main-layout">
+
+    <!-- LEFT PANEL: Form -->
+    <section class="panel form-panel" aria-label="Employee Form">
+      <div class="panel-header">
+        <h1 class="panel-title">Employee Record</h1>
+        <p class="panel-subtitle">Fill in the details below to add or update an employee.</p>
+      </div>
+
+      <form id="employee-form" novalidate autocomplete="off">
+        <!-- Employee ID -->
+        <div class="form-group" id="fg-employee_id">
+          <label for="employee_id">Employee ID <span class="required">*</span></label>
+          <input
+            id="employee_id"
+            name="employee_id"
+            type="text"
+            placeholder="e.g. EMP001"
+            autocomplete="off"
+          />
+          <span class="field-error" id="err-employee_id"></span>
+        </div>
+
+        <!-- Name -->
+        <div class="form-group" id="fg-name">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="e.g. Ravi Kumar"
+            autocomplete="off"
+          />
+          <span class="field-error" id="err-name"></span>
+        </div>
+
+        <!-- Salary fields -->
+        <div class="salary-grid">
+          <div class="form-group" id="fg-basic_salary">
+            <label for="basic_salary">Basic Salary <span class="required">*</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input id="basic_salary" name="basic_salary" type="number" min="0" step="0.01" placeholder="0.00" />
+            </div>
+            <span class="field-error" id="err-basic_salary"></span>
+          </div>
+
+          <div class="form-group" id="fg-bonus">
+            <label for="bonus">Bonus</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input id="bonus" name="bonus" type="number" min="0" step="0.01" placeholder="0.00" />
+            </div>
+            <span class="field-error" id="err-bonus"></span>
+          </div>
+
+          <div class="form-group" id="fg-deduction">
+            <label for="deduction">Deduction</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input id="deduction" name="deduction" type="number" min="0" step="0.01" placeholder="0.00" />
+            </div>
+            <span class="field-error" id="err-deduction"></span>
+          </div>
+
+          <!-- Net Salary Preview -->
+          <div class="form-group net-salary-group">
+            <label for="net_salary">Net Salary <span class="preview-tag">preview</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input id="net_salary" name="net_salary" type="text" placeholder="auto-calculated" readonly tabindex="-1" />
+            </div>
+            <span class="field-hint">Final value is calculated by the server.</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <button type="button" id="btn-add" class="btn btn-primary">
+            <span class="btn-icon">＋</span> Add Employee
+          </button>
+          <button type="button" id="btn-update" class="btn btn-secondary">
+            <span class="btn-icon">✎</span> Update Salary
+          </button>
+          <button type="button" id="btn-calcnet" class="btn btn-ghost">
+            <span class="btn-icon">⚡</span> Calculate Net
+          </button>
+          <button type="button" id="btn-clear" class="btn btn-outline">
+            <span class="btn-icon">✕</span> Clear
+          </button>
+        </div>
+      </form>
+
+      <!-- Formula Card -->
+      <div class="formula-card">
+        <span class="formula-label">KEY FORMULA</span>
+        <span class="formula-text">Net Salary = Basic Salary + Bonus − Deduction</span>
+        <span class="formula-note">Calculated exclusively by the backend.</span>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Table -->
+    <section class="panel table-panel" aria-label="Employee List">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <h2 class="panel-title">All Employees</h2>
+        </div>
+        <div class="toolbar-right">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Search by ID or name…"
+              aria-label="Search employees"
+            />
+          </div>
+          <button id="btn-delete-all" class="btn btn-danger-outline">
+            <span class="btn-icon">🗑</span> Delete All
+          </button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-scroll">
+        <table id="employees-table" aria-label="Employees list">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Basic Salary</th>
+              <th>Bonus</th>
+              <th>Deduction</th>
+              <th>Net Salary</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="employees-tbody">
+            <tr id="empty-row">
+              <td colspan="7" class="empty-state">
+                <div class="empty-icon">📋</div>
+                <div>No employees yet. Add one using the form.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── CONFIRM DIALOG ── -->
+  <div id="confirm-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="confirm-box">
+      <div class="confirm-icon">⚠️</div>
+      <h3 id="confirm-title" class="confirm-title">Confirm Action</h3>
+      <p id="confirm-message" class="confirm-message">Are you sure?</p>
+      <div class="confirm-actions">
+        <button id="confirm-cancel" class="btn btn-outline">Cancel</button>
+        <button id="confirm-ok" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
